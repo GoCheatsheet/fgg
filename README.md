@@ -50,7 +50,6 @@ Two points:
   ```
   package main;
   type A struct {};
-  func (x0 A) foo() A { return x0 };
   type B struct {
     f1 A;
     f2 A
@@ -59,7 +58,8 @@ Two points:
     m1() B;
     m2() B
   };
-  func main() { _ = A{B{}, B{}}.foo() }
+  func (x0 B) foo() B { return x0 };
+  func main() { _ = B{A{}, A{}}.foo() }
   ```
 
   A rule of thumb is, write all FG/FGG code as if you were writing Go _without_ line breaks.
@@ -71,7 +71,6 @@ Two points:
   ```
   package main;
   type A(type ) struct {};
-  func (x0 A(type )) foo(type )() A() { return x0 };
   type B(type ) struct {
     f1 A();
     f2 A()
@@ -80,7 +79,8 @@ Two points:
     m1(type )() B();
     m2(type )() B()
   };
-  func main() { _ = A(){B(){}, B(){}}.foo()() }
+  func (x0 B(type )) foo(type )() B() { return x0 };
+  func main() { _ = B(){A(){}, A(){}}.foo()() }
   ```
 
 
@@ -106,8 +106,13 @@ import "fmt";  // Only fmt is allowed
 func main () { fmt.Printf("%#v", /* This specific Printf, and only in main*/) }
 ```
 
-Note: the `var` declarations used for readability in some of the examples in the paper are not
-supported.
+Notes:
+
+  * This package additionally supports interface embedding for both FG and
+    FGG.  E.g.,  
+    `type A(type a Any()) interface { B(a) }  // Any, B are interfaces`
+
+  * The `var` declarations used for readability in some of the examples in the paper are not supported.
 
 ---
 
@@ -125,20 +130,22 @@ messages can be found at the top of the stack trace.
       assertion.)
     * `-eval` includes a dynamic type preservation check (an error raises a panic).
 
-* **FGG type check and evaluate**, with verbose printing.
+* **FGG type check and evaluate**, with verbose printing.  (Note the `-fgg`
+  flag.)
 
-  `go run oopsla20-91/fgg -fgg -eval=-1 -v fgg/examples/oopsla20/fig3/functions.go`
+  `go run oopsla20-91/fgg -fgg -eval=-1 -v fgg/examples/oopsla20/fig3/functions.fgg`
 
 * **FGG type check, nonomo check and monomorphisation**, with verbose printing.
 
-  `go run oopsla20-91/fgg -fgg -monomc=-- -v fgg/examples/oopsla20/fig3/functions.go`
+  `go run oopsla20-91/fgg -fgg -monomc=-- -v fgg/examples/oopsla20/fig3/functions.fgg`
 
     * The argument to `-monomc` is a file location for the FG output.  `--`
       means print the output.
 
 * **Simulate FGG against its FG monomorphisation**, with verbose printing.
 
-  `go run oopsla20-91/fgg -test-monom -v fgg/examples/oopsla20/fig3/functions.go`
+  `go run oopsla20-91/fgg -test-monom -v
+  fgg/examples/oopsla20/fig3/functions.fgg`
 
     * This includes dynamic checking of type preservation checking at both
       levels, and of the monomorphisation correspondence at every evaluation
@@ -149,7 +156,7 @@ messages can be found at the top of the stack trace.
 
 ### Example `Makefile` tests.
 
-* `make test-fgg-against-go`
+* `make test-monom-against-go`
 
   * Type checks and evaluates a series of FGG programs;
   * _nomono_ checks and monomorphises each to an FG program;
@@ -157,7 +164,7 @@ messages can be found at the top of the stack trace.
   * compiles and executes the FG program using `go`;
   * compares the results from `fgg` and `go`.
 
-* `simulate-fgg`
+* `simulate-monom`
 
   * Simulates a series of FGG programs against their FG monomorphisations.
 
