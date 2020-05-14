@@ -281,7 +281,7 @@ test-monom-against-go:
 
 	$(call eval_monom_fgg_against_go,fgg/examples/oopsla20/fig3/functions.fgg,tmp/test/fg/oopsla20/functions,functions.go)
 	$(call eval_monom_fgg_against_go,fgg/examples/oopsla20/fig4/lists.fgg,tmp/test/fg/oopsla20/lists,lists.go)
-	$(call eval_monom_fgg_against_go,fgg/examples/oopsla20/fig5/graph.fgg,tmp/test/fg/oopsla20/graph,grahh.go)
+	$(call eval_monom_fgg_against_go,fgg/examples/oopsla20/fig5/graph.fgg,tmp/test/fg/oopsla20/graph,graph.go)
 	#$(call eval_monom_fgg_against_go,fgg/examples/oopsla20/fig6/expression.fgg,tmp/test/fg/oopsla20/expression,expression.go)  #go= "({{{}}}+{{}})" 
 
 define rm_monom
