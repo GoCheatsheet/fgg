@@ -1,4 +1,4 @@
-//$ go run github.com/rhu1/fgg -fgg -v -eval=10 fgg/examples/hello/fmtprintf.fgg
+//$ go run oopsla20-91/fgg -fgg -v -eval=10 fgg/examples/hello/fmtprintf.fgg
 
 // N.B. FGG (or at least this implementation) is intended to be white-space *insensitive*.
 // (E.g., this program could be written all on one line.)

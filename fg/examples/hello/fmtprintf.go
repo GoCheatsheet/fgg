@@ -1,6 +1,5 @@
-//$ go run github.com/rhu1/fgg -v -eval=10 fg/examples/hello/fmtprintf.go
-// Cf.
-//$ go run github.com/rhu1/fgg/fg/examples/hello
+//$ go run oopsla20-91/fgg -v -eval=10 fg/examples/hello/fmtprintf.go
+// Cf. go run oopsla20-91/fgg/fg/examples/hello
 
 // N.B. FG (or at least this implementation) is intended to be white-space *insensitive*.
 // (E.g., this program could be written all on one line.)

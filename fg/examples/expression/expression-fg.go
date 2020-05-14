@@ -1,5 +1,4 @@
-//rhu@HZHL4 MINGW64 ~/code/go/src/github.com/rhu1/fgg
-//$ go run github.com/rhu1/fgg -eval=-1 -v fg/examples/expression/expression-fg.go
+//$ go run oopsla20-91/fgg -eval=-1 -v fg/examples/expression/expression-fg.go
 
 // An almost-solution to the Expression Problem in FG.
 
@@ -15,63 +14,64 @@
 // and to do so *without* altering the Expr interface
 // (the line in Expr marked "// 2").
 
-package main;
+package main
 
 // 1
 
 // TODO
-type Int interface { isInt() Int };
-type One struct { };
-func (x0 One) isInt() Int { return x0 };
+type Int interface{ isInt() Int }
+type One struct{}
+
+func (x0 One) isInt() Int { return x0 }
 
 type Expr interface {
-  Eval() Int;
-  String() string // 2  // TODO: WF
-};
+	Eval() Int
+	String() string // 2  // TODO: WF
+}
 
 type Con struct {
-  value Int
-};
+	value Int
+}
 
 func (e Con) Eval() Int {
-  return e.value
-};
+	return e.value
+}
 
 type Add struct {
-  left Expr;
-  right Expr
-};
+	left  Expr
+	right Expr
+}
 
 func (e Add) Eval() Int {
-  return e.left.Eval()// + e.right.Eval()  // TODO
-};
+	return e.left.Eval() // + e.right.Eval()  // TODO
+}
 
 // 2
 
 func (e Con) String() string {
-  return fmt.Sprintf("%v", e.value)
-};
+	return fmt.Sprintf("%v", e.value)
+}
 
 func (e Add) String() string {
-  return fmt.Sprintf("(%v+%v)", e.left.String(), e.right.String())
-};
+	return fmt.Sprintf("(%v+%v)", e.left.String(), e.right.String())
+}
 
 // 3
 
 type Neg struct {
-  expr Expr
-};
+	expr Expr
+}
 
 func (e Neg) Eval() Int {
-  //return - e.expr.Eval()
-  return One{}  // TODO
-};
+	//return - e.expr.Eval()
+	return One{} // TODO
+}
 
 // 4
 
 func (e Neg) String() string {
-  return fmt.Sprintf("-%v", e.expr.String())
-};
+	return fmt.Sprintf("-%v", e.expr.String())
+}
 
 func main() {
 	_ = Add{Con{One{}}, Con{One{}}}.String()

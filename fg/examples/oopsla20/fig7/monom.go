@@ -1,8 +1,8 @@
 /* This is monom output for fig 4, i.e.:
- *     go run github.com/rhu1/fgg -fgg -monomc=-- fgg/examples/oopsla20/fig4/lists.fgg
+ *     go run oopsla20-91/fgg -fgg -monomc=-- fgg/examples/oopsla20/fig4/lists.fgg
  */
 
-//$ go run github.com/rhu1/fgg -eval=-1 -v fg/examples/oopsla20/fig7/monom.go
+//$ go run oopsla20-91/fgg -eval=-1 -v fg/examples/oopsla20/fig7/monom.go
 
 package main;
 import "fmt";

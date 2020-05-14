@@ -1,4 +1,4 @@
-//$ go run github.com/rhu1/fgg -eval=-1 -v fg/examples/oopsla20/fig1/functions.go
+//$ go run oopsla20-91/fgg -eval=-1 -v fg/examples/oopsla20/fig1/functions.go
 
 package main;
 
