@@ -4,8 +4,6 @@ import "reflect"
 
 import "oopsla20-91/fgg/base"
 
-//import "oopsla20-91/fgg/fgg"
-
 /* Aliases from base */
 // TODO: refactor?
 
@@ -130,15 +128,3 @@ func isInterfaceType(ds []Decl, t Type) bool {
 	}
 	return false
 }
-
-/* Old */
-
-/*type Rep struct {
-	u fgg.Type // FIXME: Rep doesn't carry u any more
-}
-
-//var _ Type = Rep{}  // FIXME -- no: this "Rep" is not a String/Type
-
-func (r Rep) String() string {
-	return "Rep(" + r.u.String() + ")"
-}*/

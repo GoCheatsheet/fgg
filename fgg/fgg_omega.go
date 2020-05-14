@@ -84,12 +84,7 @@ func toKey_Wm(x MethInstan) string {
 /* fixOmega */
 
 func fixomega(ds []Decl, omega Omega) {
-	/*fmt.Println("......initial.........", len(omega.us), len(omega.ms))
-	omega.Println()
-	fmt.Println(".............", len(omega.us), len(omega.ms))*/
 	for auxG(ds, omega) {
-		//omega.Println()
-		//fmt.Println(".............", len(omega.us), len(omega.ms))
 	}
 }
 

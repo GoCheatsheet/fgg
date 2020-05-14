@@ -48,8 +48,6 @@ func parse(verbose bool, a base.Adaptor, src string, strict bool) base.Program {
 	return prog
 }
 
-// N.B. currently FG panic comes out implicitly as an underlying run-time panic
-// CHECKME: add explicit FG panics?
 // If steps == EVAL_TO_VAL, then eval to value
 // Post: intrp.GetProgram() contains the eval result; result type is returned
 func eval(intrp Interp, steps int) base.Type {

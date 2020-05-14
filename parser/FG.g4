@@ -1,4 +1,3 @@
-//rhu@HZHL4 MINGW64 ~/code/go/src/github.com/rhu1/fgg
 //$ antlr4 -Dlanguage=Go -o parser/fg parser/FG.g4
 
 // Cf. https://github.com/antlr/grammars-v4/blob/master/golang/Golang.g4

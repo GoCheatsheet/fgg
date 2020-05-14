@@ -11,7 +11,6 @@ import (
 
 /* For "strict" parsing, *parser* errors -- cf. F(G)GBailLexer */
 
-// Cf. https://stackoverflow.com/questions/51683104/how-to-catch-minor-errors
 type StrictErrorStrategy struct {
 	antlr.DefaultErrorStrategy
 }

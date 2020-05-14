@@ -1,4 +1,3 @@
-//rhu@HZHL4 MINGW64 ~/code/go/src/oopsla20-91/fgg
 //$ go test oopsla20-91/fgg/fg
 //$ go test oopsla20-91/fgg/fg -run Test001
 
@@ -355,10 +354,6 @@ func Test018b(t *testing.T) {
 }
 
 /* Eval */
-
-// TODO: run all the above Good tests using -eval=-1
-// TODO: put these tests through actual Go and compare the results
-// TOOD: and make translation to FGG and compare results to -fgg
 
 func TestEval001(t *testing.T) {
 	A := "type A struct {}"

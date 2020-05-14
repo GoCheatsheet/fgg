@@ -343,31 +343,3 @@ func writeParamDecls(b *strings.Builder, pds []ParamDecl) {
 		}
 	}
 }
-
-/* Old -- deprecated */
-
-//*/
-
-// RH: Possibly refactor aspects of this and related as "Decl.Wf()" -- the parts of "Ok()" omitted from the paper
-func isDistinctDecl(decl Decl, ds []Decl) bool {
-	var count int
-	for _, d := range ds {
-		switch d := d.(type) {
-		case TDecl:
-			// checks that type-name is unique regardless of definition
-			// RH: Refactor as a single global pass (use a temp map), or into a TDecl.Wf() -- done: currently integrated into FGRProgram.Ok for now (to avoid a second iteration)
-			if td, ok := decl.(TDecl); ok && d.GetName() == td.GetName() {
-				count++
-			}
-		case MDecl:
-			// checks that (method-type, method-name) is unique
-			// RH: CHECKME: this would allow (bad) "return overloading"? -- note, d.t is the method return type
-			if md, ok := decl.(MDecl); ok && d.t_ret.String() == md.t_ret.String() && d.GetName() == md.GetName() {
-				count++
-			}
-		}
-	}
-	return count == 1
-}
-
-//*/

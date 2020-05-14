@@ -1,4 +1,3 @@
-//rhu@HZHL4 MINGW64 ~/code/go/src/oopsla20-91/fgg
 //$ go test oopsla20-91/fgg/fg
 //$ go test oopsla20-91/fgg/fg -run Test001
 

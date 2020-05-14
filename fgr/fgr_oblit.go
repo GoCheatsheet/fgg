@@ -316,3 +316,20 @@ func mkRep_oblit(u fgg.Type) FGRExpr { // Duplicated from fgr_translation
 			": " + u.String())
 	}
 }
+
+// Post: TypeTree or TmpTParam
+func mkRep(u fgg.Type) FGRExpr {
+	switch u1 := u.(type) {
+	case fgg.TParam:
+		return TmpTParam{u1.String()}
+	case fgg.TNamed:
+		us := u1.GetTArgs()
+		es := make([]FGRExpr, len(us))
+		for i := 0; i < len(us); i++ {
+			es[i] = mkRep(us[i])
+		}
+		return TRep{u1.GetName(), es}
+	default:
+		panic("Unknown fgg.Type kind " + reflect.TypeOf(u).String() + ": " + u.String())
+	}
+}
