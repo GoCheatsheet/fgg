@@ -1,4 +1,4 @@
-//$ go run oopsla20-91/fgg -v -eval=13 fg/examples/popl20/map/map.go
+//$ go run oopsla20-91/fgg -v -eval=13 fg/examples/prev/map/map.go
 
 package main;
 

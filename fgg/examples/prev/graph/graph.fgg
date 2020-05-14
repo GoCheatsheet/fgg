@@ -1,4 +1,4 @@
-//$ go run oopsla20-91/fgg -fgg -eval=-1 -v fgg/examples/popl20/graph/graph.fgg
+//$ go run oopsla20-91/fgg -fgg -eval=-1 -v fgg/examples/prev/graph/graph.fgg
 
 package main;
 

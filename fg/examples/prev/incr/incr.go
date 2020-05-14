@@ -1,4 +1,4 @@
-//$ go run oopsla20-91/fgg -v -eval=30 fg/examples/popl20/incr/incr.go
+//$ go run oopsla20-91/fgg -v -eval=30 fg/examples/prev/incr/incr.go
 
 package main;
 

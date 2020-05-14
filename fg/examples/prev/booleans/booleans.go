@@ -1,4 +1,4 @@
-//$ go run oopsla20-91/fgg -v -eval=7 fg/examples/popl20/booleans/booleans.go
+//$ go run oopsla20-91/fgg -v -eval=7 fg/examples/prev/booleans/booleans.go
 
 package main;
 

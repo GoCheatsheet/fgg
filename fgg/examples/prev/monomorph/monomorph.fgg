@@ -1,6 +1,6 @@
-//$ go run oopsla20-91/fgg -fgg -eval=-1 -monom -v fgg/examples/popl20/monomorph/monomorph.fgg
+//$ go run oopsla20-91/fgg -fgg -eval=-1 -monom -v fgg/examples/prev/monomorph/monomorph.fgg
 // or
-//$ go run oopsla20-91/fgg -fgg -eval=-1 -compile=tmp/fg/monomorph/monomorph.go -v fgg/examples/popl20/monomorph/monomorph.fgg
+//$ go run oopsla20-91/fgg -fgg -eval=-1 -compile=tmp/fg/monomorph/monomorph.go -v fgg/examples/prev/monomorph/monomorph.fgg
 //$ go run oopsla20-91/fgg -eval=-1 -v tmp/fg/monomorph/monomoprh.go
 
 package main;

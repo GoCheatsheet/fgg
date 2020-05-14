@@ -1,4 +1,4 @@
-//$ go run oopsla20-91/fgg -fgg -monomc=tmp/fg/monom/julien/struct-prob.go -v fgg/examples/monom/julien/struct-prob.go
+//$ go run oopsla20-91/fgg -fgg -monomc=tmp/fg/monom/abcdef/struct-prob.go -v fgg/examples/monom/abcdef/struct-prob.go
 
 package main;
 

@@ -1,6 +1,6 @@
-//$ go run oopsla20-91/fgg -fgg -eval=-1 -v fgg/examples/popl20/irregular/irregular.fgg
+//$ go run oopsla20-91/fgg -fgg -eval=-1 -v fgg/examples/prev/irregular/irregular.fgg
 // or
-//$ go run oopsla20-91/fgg -fgg -eval=-1 -compile=tmp/fg/irregular/irregular.go -v fgg/examples/popl20/irregular/irregular.fgg
+//$ go run oopsla20-91/fgg -fgg -eval=-1 -compile=tmp/fg/irregular/irregular.go -v fgg/examples/prev/irregular/irregular.fgg
 //$ go run oopsla20-91/fgg -eval=-1 -v tmp/fg/irregular/irregular.go
 
 package main;
