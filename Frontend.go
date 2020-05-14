@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/rhu1/fgg/base"
-	"github.com/rhu1/fgg/fg"
-	"github.com/rhu1/fgg/fgg"
-	"github.com/rhu1/fgg/fgr"
+	"oopsla20-91/fgg/base"
+	"oopsla20-91/fgg/fg"
+	"oopsla20-91/fgg/fgg"
+	"oopsla20-91/fgg/fgr"
 )
 
 var _ = os.Args

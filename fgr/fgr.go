@@ -2,9 +2,9 @@ package fgr
 
 import "reflect"
 
-import "github.com/rhu1/fgg/base"
+import "oopsla20-91/fgg/base"
 
-//import "github.com/rhu1/fgg/fgg"
+//import "oopsla20-91/fgg/fgg"
 
 /* Aliases from base */
 // TODO: refactor?

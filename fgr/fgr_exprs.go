@@ -8,7 +8,7 @@ package fgr
 import "fmt"
 import "strings"
 
-import "github.com/rhu1/fgg/fgg"
+import "oopsla20-91/fgg/fgg"
 
 var _ = fmt.Errorf
 

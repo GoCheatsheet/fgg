@@ -1,6 +1,6 @@
-//rhu@HZHL4 MINGW64 ~/code/go/src/github.com/rhu1/fgg
-//$ go test github.com/rhu1/fgg/fg
-//$ go test github.com/rhu1/fgg/fg -run Test001
+//rhu@HZHL4 MINGW64 ~/code/go/src/oopsla20-91/fgg
+//$ go test oopsla20-91/fgg/fg
+//$ go test oopsla20-91/fgg/fg -run Test001
 
 package fg_test // Separate package, can test "API"
 
@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/rhu1/fgg/base"
-	"github.com/rhu1/fgg/base/testutils"
-	"github.com/rhu1/fgg/fg"
+	"oopsla20-91/fgg/base"
+	"oopsla20-91/fgg/base/testutils"
+	"oopsla20-91/fgg/fg"
 )
 
 /* Harness funcs */

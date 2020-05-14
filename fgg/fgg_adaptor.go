@@ -6,10 +6,10 @@ import (
 
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 
-	"github.com/rhu1/fgg/base"
-	"github.com/rhu1/fgg/base/testutils"
-	"github.com/rhu1/fgg/parser/fgg"
-	"github.com/rhu1/fgg/parser/util"
+	"oopsla20-91/fgg/base"
+	"oopsla20-91/fgg/base/testutils"
+	"oopsla20-91/fgg/parser/fgg"
+	"oopsla20-91/fgg/parser/util"
 )
 
 var _ = fmt.Errorf
@@ -258,8 +258,8 @@ func (a *FGGAdaptor) ExitStructLit(ctx *parser.StructLitContext) {
 	tmp := a.pop()
 	cast, ok := tmp.(TNamed)
 	if !ok { // N.B. \tau_S, means "of the form t_S(~\tau)" (so a TName) -- i.e., not \alpha
-	panic(testutils.PARSER_PANIC_PREFIX + "Expected named type, not: " +
-		reflect.TypeOf(tmp).String() + "\n\t" + tmp.String())
+		panic(testutils.PARSER_PANIC_PREFIX + "Expected named type, not: " +
+			reflect.TypeOf(tmp).String() + "\n\t" + tmp.String())
 	}
 	a.push(StructLit{cast, es})
 }

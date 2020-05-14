@@ -9,7 +9,7 @@ import "fmt"
 import "reflect"
 import "strings"
 
-import "github.com/rhu1/fgg/base"
+import "oopsla20-91/fgg/base"
 
 var _ = fmt.Errorf
 

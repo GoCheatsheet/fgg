@@ -1,33 +1,3 @@
-// Pre(1): ANTLR4 Runtime for Go
-//$ go get github.com/antlr/antlr4/runtime/Go/antlr
-//
-// Optional:
-//$ cd [GOHOME]/src/github.com/antlr/antlr4
-//$ git checkout -b antlr-go-runtime tags/4.7.1  // Match antlr-4.7.1-complete.jar -- but unnecessary
-
-// Pre(2):
-// [GOHOME]/src/github.com/rhu1/fgg
-// $ mkdir parser/fg
-// $ cp parser/pregren/fg/* parser/fg
-// $ mkdir parser/fgg
-// $ cp parser/pregren/fgg/* parser/fgg
-
-// Run examples:
-//$ go run github.com/rhu1/fgg -v -eval=10 fg/examples/hello/hello.go
-//$ go run github.com/rhu1/fgg -v -inline="package main; type A struct {}; func main() { _ = A{} }"
-
-// Optional alternative to Pre(2): ANTLR4 -- e.g., antlr-4.7.1-complete.jar
-// Assuming "antlr4" alias for (e.g.): java -jar ~/code/java/lib/antlr-4.7.1-complete.jar
-//$ go generate
-// Cf. below:
-//go:generate antlr4 -Dlanguage=Go -o parser/fg parser/FG.g4
-//go:generate antlr4 -Dlanguage=Go -o parser/fgg parser/FGG.g4
-
-// FGG gotchas:
-// type B(type a Any) struct { f a }; // Any parsed as a TParam -- currently not permitted
-// Node(Nat){...} // fgg.FGGNode (Nat) is fgg.TParam, not fgg.TName
-// type IA(type ) interface { m1() };  // m1() parsed as a TName (an invalid Spec) -- N.B. ret missing anyway
-
 package main
 
 import (
@@ -38,10 +8,10 @@ import (
 	"reflect"
 	"strconv"
 
-	"github.com/rhu1/fgg/base"
-	"github.com/rhu1/fgg/fg"
-	"github.com/rhu1/fgg/fgg"
-	"github.com/rhu1/fgg/fgr"
+	"oopsla20-91/fgg/base"
+	"oopsla20-91/fgg/fg"
+	"oopsla20-91/fgg/fgg"
+	"oopsla20-91/fgg/fgr"
 )
 
 var _ = reflect.TypeOf
@@ -127,35 +97,6 @@ Options:
 	os.Exit(1)
 }
 
-// TODO
-// - refactor functionality into cmd dir
-// - add type preserv to monom test -- DONE
-// - add tests for interface omega building
-// - fix embedding monom -- DONE
-// - fix monom name mangling -- partial: fix "commas" (test ANTLR unicode)
-// - fix parser nil vs. empty creation
-// - WF check for duplicate decl names
-// - WF recursive structs check
-// - WF types declared, names in scope
-// - sig-equals-alpha and covariant receiver bounds -- expose test -- DONE -- TODO: oblit for map.fgg (memberBr, receiver param alpha)
-// - test and fix Delta in methods (re. covariant receiver bounds) -- expose test
-// - update "polyrec" check -- DONE: nomono
-// - add p-closure replacement DONE -- expose test
-// - test monom on latest examples -- DONE
-// - nomono: fix mutual-poly-rec (should blow up without ismonom) ...fix struct-poly-rec, omega building loops (add recursive struct WF?) -- DONE
-// - factor out FGR better with FG -- FGR doesn't have latest Ok/Typing changes from FG yet
-// - factor out FG/FGG/FGR aux, helper, etc. (use Type/Expr/... interfaces more)
-// - add result caching maps for optimisation
-// artifact
-// - add nomono tests -- DONE
-// - fg vs. go results, add to makefile -- partial: need to generalise and extend to monom tests -- DONE
-// - latest paper examples
-// - reorganise example dirs
-// - bad assert eval, no panic -- -test-monom
-// - generally, exit codes instead of panic
-// design
-// - unification based impls/nomono
-// - assert-driven duck typing dummies -- dummy meths as nominal duck typing (cf. nominal type names)
 func main() {
 	flag.Usage = usage
 	flag.Parse()
@@ -386,99 +327,6 @@ func testOblit(verbose bool, src string) {
 		"\n\toblit="+e1_oblit.String())
 }
 
-//*/
-
-/*
-func testOblit(verbose bool, src string, steps int) {
-	intrp_fgg := NewFGGInterp(verbose, src, true)
-	p_fgg := intrp_fgg.GetProgram().(fgg.FGGProgram)
-	u := p_fgg.Ok(false).(fgg.TNamed) // Ground
-	vPrintln(verbose, "\nFGG expr: "+p_fgg.GetMain().String())
-
-	// (Initial) left-vertical arrow
-	p_oblit := fgr.Obliterate(intrp_fgg.GetSource().(fgg.FGGProgram))
-	vPrintln(verbose, "Oblit expr: "+p_oblit.GetMain().String())
-	t := p_oblit.Ok(false).(fgr.Type)
-	if !t.Equals(fgr.ToFgrTypeFromBounds(make(fgg.Delta), u)) {
-		panic("-test-oblit failed: types do not match\n\tFGG type=" + u.String() +
-			" -> " + fgg.ToMonomId(u).String() + "\n\toblit=" + t.String())
-	}
-
-	done := steps > EVAL_TO_VAL
-	for i := 0; i < steps || !done; i++ {
-		if p_fgg.GetMain().IsValue() {
-			break
-		}
-		// Repeat: horizontal arrows and right-vertical arrow
-		p_fgg, u, p_oblit = testOblitStep(verbose, p_fgg, u, p_oblit)
-	}
-	vPrintln(verbose, "\nFinished:\n\tfgg="+p_fgg.GetMain().String()+
-		"\n\toblit="+p_oblit.GetMain().String())
-}
-
-// Pre: u = p_fgg.Ok(), t = p_fgr.Ok()
-func testOblitStep(verbose bool, p_fgg fgg.FGGProgram, u fgg.TNamed,
-	p_oblit fgr.FGRProgram) (fgg.FGGProgram, fgg.TNamed, fgr.FGRProgram) {
-
-	// Upper-horizontal arrow
-	p1_fgg, _ := p_fgg.Eval()
-	vPrintln(verbose, "\nEval FGG one step: "+p1_fgg.GetMain().String())
-	u1 := p1_fgg.Ok(true).(fgg.TNamed)  // Ground
-	if !u1.Impls(p_fgg.GetDecls(), u) { // TODO: factor out with Frontend.eval
-		panic("-test-oblit failed: type not preserved\n\tprev=" + u.String() +
-			"\n\tnext=" + u1.String())
-	}
-
-	// Lower-horizontal arrow -- FIXME: need to greedily do "weak" inserted asserts
-	p1_oblit, _ := p_oblit.Eval()
-	vPrintln(verbose, "Eval oblit one step: "+p1_oblit.GetMain().String())
-	t1 := p1_oblit.Ok(true).(fgr.Type)
-	if !t1.Equals(fgr.ToFgrTypeFromBounds(make(fgg.Delta), u1)) { // CHECKME: needed? or just do monom-level type preservation?
-		panic("-test-oblit failed: types do not match\n\tFGG type=" + u1.String() +
-			" -> " + fgg.ToMonomId(u1).String() + "\n\toblit=" + t1.String())
-	}
-
-	// Right-vertical arrow
-	res := fgr.Obliterate(p1_fgg.(fgg.FGGProgram))
-	e_fgg := res.GetMain()
-	e_fgr := p1_oblit.GetMain()
-	if e_fgg.IsValue() { // FIXME failed hack, number of eval steps don't correspond
-		vPrintln(verbose, "Oblit of one step'd FGG: "+e_fgg.String())
-		if e_fgg.String() != e_fgr.String() {
-			panic("-test-oblit failed: exprs do not match\n\tFGG expr=" + e_fgg.String() +
-				"\n\toblit=" + e_fgr.String())
-		}
-	} else if e_fgr.IsValue() {
-		panic("-test-oblit failed: exprs do not match\n\tFGG expr=" + e_fgg.String() +
-			"\n\toblit=" + e_fgr.String())
-	}
-
-	return p1_fgg.(fgg.FGGProgram), u1, p1_oblit.(fgr.FGRProgram)
-}
-//*/
-
-/* [WIP] TODO -- not functional yet
-func doWrappers(prog base.Program, compile string) {
-	if compile == "" {
-		return
-	}
-	vPrintln("\nTranslating FGG to FG(R) using Wrappers: [Warning] WIP [Warning]")
-	//p_fgr := fgg.FgAdptrTranslate(prog.(fgg.FGGProgram))
-	//p_fgr := fgg.FgrTranslate(prog.(fgg.FGGProgram))
-	p_fgr := fgr.Translate(prog.(fgg.FGGProgram))
-	out := p_fgr.String()
-	// TODO: factor out with -monomc
-	if compile == "--" {
-		fmt.Println(out)
-	} else {
-		vPrintln("Writing output to: " + compile)
-		bs := []byte(out)
-		err := ioutil.WriteFile(compile, bs, 0644)
-		checkErr(err)
-	}
-}
-//*/
-
 // For convenient quick testing -- via flag "-internal"
 func internalSrc() string {
 	Any := "type Any interface {}"
@@ -495,20 +343,3 @@ func checkErr(e error) {
 		panic(e)
 	}
 }
-
-/**
-TODO:
-- mutual-poly-rec should blow up when ismonom check off -- omega sigs => t.m pairs
-- struct-poly-rec should be monomable -- more aggressive method dropping in omega *building*; need to distinguish actual receiver types from other seen types, for applying omega to mdecls
-- WF: e.g., repeat type decl
-- add monom-eval commutativity check
-- factor out more into base
-
-	//b.WriteString("type B struct { f t };\n")  // TODO: unknown type
-	//b.WriteString("type B struct { b B };\n")  // TODO: recursive struct
-*/
-
-// Alternative Run:
-//$ go install
-//$ $GOPATH/bin/fgg.exe ...
-// N.B. GoInstall installs to $CYGHOME/code/go/bin (not $WINHOME)

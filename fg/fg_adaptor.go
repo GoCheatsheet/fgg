@@ -6,10 +6,10 @@ import (
 
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 
-	"github.com/rhu1/fgg/base"
-	"github.com/rhu1/fgg/base/testutils"
-	"github.com/rhu1/fgg/parser/fg"
-	"github.com/rhu1/fgg/parser/util"
+	"oopsla20-91/fgg/base"
+	"oopsla20-91/fgg/base/testutils"
+	"oopsla20-91/fgg/parser/fg"
+	"oopsla20-91/fgg/parser/util"
 )
 
 var _ = fmt.Errorf

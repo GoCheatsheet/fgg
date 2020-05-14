@@ -2,7 +2,7 @@ package fg
 
 import "reflect"
 
-import "github.com/rhu1/fgg/base"
+import "oopsla20-91/fgg/base"
 
 /* Aliases from base */
 // TODO: refactor?

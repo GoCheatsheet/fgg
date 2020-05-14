@@ -4,12 +4,12 @@
 
 #.PHONY: build
 #build:
-#	go build github.com/rhu1/fgg
+#	go build oopsla20-91/fgg
 #
 #
 #.PHONY: install
 #install:
-#	go install github.com/rhu1/fgg
+#	go install oopsla20-91/fgg
 
 .PHONY: test
 test: test-fg test-fgg test-fg2fgg
@@ -33,11 +33,11 @@ test-fg: test-fg-unit test-fg-examples
 
 .PHONY: test-fg-unit
 test-fg-unit:
-	go test github.com/rhu1/fgg/fg
+	go test oopsla20-91/fgg/fg
 
 
 define eval_fg
-	RES=`go run github.com/rhu1/fgg -eval=$(2) $(1)`; \
+	RES=`go run oopsla20-91/fgg -eval=$(2) $(1)`; \
 	EXIT=$$?; if [ $$EXIT -ne 0 ]; then exit $$EXIT; fi; \
 	echo $$RES
 endef
@@ -64,7 +64,7 @@ test-fg-examples:
 
 # N.B. semicolons and line esacapes, and double-dollar
 define test_fg_against_go
-	EXP=`go run github.com/rhu1/fgg -eval=-1 -printf $(1)`; \
+	EXP=`go run oopsla20-91/fgg -eval=-1 -printf $(1)`; \
 	echo "fg="$$EXP; \
 	ACT=`go run $(1)`; \
 	echo "go="$$ACT; \
@@ -99,11 +99,11 @@ test-fgg: test-fgg-unit test-nomono-bad simulate-monom simulate-oblit
 
 .PHONY: test-fgg-unit
 test-fgg-unit:
-	go test github.com/rhu1/fgg/fgg
+	go test oopsla20-91/fgg/fgg
 
 
 define eval_fgg
-	RES=`go run github.com/rhu1/fgg -fgg -eval=$(2) $(1)`; \
+	RES=`go run oopsla20-91/fgg -fgg -eval=$(2) $(1)`; \
 	EXIT=$$?; if [ $$EXIT -ne 0 ]; then exit $$EXIT; fi; \
 	echo $$RES
 endef
@@ -159,7 +159,7 @@ test-fgg-examples:
 
 
 define nomono_bad
-	RES=`go run github.com/rhu1/fgg -fgg -monomc=-- $(1) 2> /dev/null`; \
+	RES=`go run oopsla20-91/fgg -fgg -monomc=-- $(1) 2> /dev/null`; \
 	EXIT=$$?; if [ $$EXIT -ne 1 ]; then \
 		echo "Expected nomono violation, but none occurred."; \
 		exit 1; \
@@ -179,7 +179,7 @@ test-nomono-bad:
 
 
 define sim_monom
-	`go run github.com/rhu1/fgg -test-monom -eval=$(2) $(1)`; \
+	`go run oopsla20-91/fgg -test-monom -eval=$(2) $(1)`; \
 	EXIT=$$?; if [ $$EXIT -ne 0 ]; then exit $$EXIT; fi
 endef
 
@@ -224,20 +224,20 @@ simulate-monom:
 
 define eval_monom_fgg
 	mkdir -p $(3); \
-	RES=`go run github.com/rhu1/fgg -fgg -eval=$(2) -monomc=$(3)/$(4) $(1)`; \
+	RES=`go run oopsla20-91/fgg -fgg -eval=$(2) -monomc=$(3)/$(4) $(1)`; \
 	EXIT=$$?; if [ $$EXIT -ne 0 ]; then exit $$EXIT; fi; \
 	echo "fgg="$$RES; \
-	EXP=`go run github.com/rhu1/fgg -eval=$(2) $(3)/$(4)`; \
+	EXP=`go run oopsla20-91/fgg -eval=$(2) $(3)/$(4)`; \
 	EXIT=$$?; if [ $$EXIT -ne 0 ]; then exit $$EXIT; fi; \
 	echo "fg= "$$EXP
 endef
 
 define eval_monom_fgg_against_go
 	mkdir -p $(2); \
-	RES=`go run github.com/rhu1/fgg -fgg -eval=-1 -monomc=$(2)/$(3) $(1)`; \
+	RES=`go run oopsla20-91/fgg -fgg -eval=-1 -monomc=$(2)/$(3) $(1)`; \
 	EXIT=$$?; if [ $$EXIT -ne 0 ]; then exit $$EXIT; fi; \
 	echo "fgg="$$RES; \
-	EXP=`go run github.com/rhu1/fgg -eval=-1 -printf $(2)/$(3)`; \
+	EXP=`go run oopsla20-91/fgg -eval=-1 -printf $(2)/$(3)`; \
 	echo "fg= "$$EXP; \
 	ACT=`go run $(2)/$(3)`; \
 	echo "go= "$$ACT; \
@@ -328,63 +328,63 @@ clean-test-monom-against-go:
 
 .PHONY: simulate-oblit
 simulate-oblit:
-	go run github.com/rhu1/fgg -test-oblit -eval=-1 fgg/examples/popl20/booleans/booleans.fgg
-	go run github.com/rhu1/fgg -test-oblit -eval=-1 fgg/examples/popl20/compose/compose.fgg
-	go run github.com/rhu1/fgg -test-oblit -eval=-1 fgg/examples/popl20/graph/graph.fgg
-	go run github.com/rhu1/fgg -test-oblit -eval=-1 fgg/examples/popl20/irregular/irregular.fgg
-	go run github.com/rhu1/fgg -test-oblit -eval=-1 fgg/examples/popl20/map/map.fgg
-	go run github.com/rhu1/fgg -test-oblit -eval=-1 fgg/examples/popl20/monomorph/monomorph.fgg
+	go run oopsla20-91/fgg -test-oblit -eval=-1 fgg/examples/popl20/booleans/booleans.fgg
+	go run oopsla20-91/fgg -test-oblit -eval=-1 fgg/examples/popl20/compose/compose.fgg
+	go run oopsla20-91/fgg -test-oblit -eval=-1 fgg/examples/popl20/graph/graph.fgg
+	go run oopsla20-91/fgg -test-oblit -eval=-1 fgg/examples/popl20/irregular/irregular.fgg
+	go run oopsla20-91/fgg -test-oblit -eval=-1 fgg/examples/popl20/map/map.fgg
+	go run oopsla20-91/fgg -test-oblit -eval=-1 fgg/examples/popl20/monomorph/monomorph.fgg
 	# TODO: currently trying to run to termination
-	#go run github.com/rhu1/fgg -test-oblit -eval=10 fgg/examples/monom/box/box.fgg
-	#go run github.com/rhu1/fgg -test-oblit -eval=10 fgg/examples/monom/box/box2.fgg
+	#go run oopsla20-91/fgg -test-oblit -eval=10 fgg/examples/monom/box/box.fgg
+	#go run oopsla20-91/fgg -test-oblit -eval=10 fgg/examples/monom/box/box2.fgg
 
-	go run github.com/rhu1/fgg -test-oblit -eval=-1 fgg/examples/monom/julien/ifacebox.fgg
+	go run oopsla20-91/fgg -test-oblit -eval=-1 fgg/examples/monom/julien/ifacebox.fgg
 
 	# TODO?
-	#go run github.com/rhu1/fgg -test-oblit -eval=-1 fgg/examples/monom/julien/iface-embedding-simple.go
-	#go run github.com/rhu1/fgg -test-oblit -eval=-1 fgg/examples/monom/julien/iface-embedding.go
+	#go run oopsla20-91/fgg -test-oblit -eval=-1 fgg/examples/monom/julien/iface-embedding-simple.go
+	#go run oopsla20-91/fgg -test-oblit -eval=-1 fgg/examples/monom/julien/iface-embedding.go
 
-	go run github.com/rhu1/fgg -test-oblit -eval=-1 fgg/examples/monom/julien/mono-ok/rcver-iface.go
-	go run github.com/rhu1/fgg -test-oblit -eval=-1 fgg/examples/monom/julien/mono-ok/one-pass-prob.go
-	go run github.com/rhu1/fgg -test-oblit -eval=-1 fgg/examples/monom/julien/mono-ok/contamination.go
+	go run oopsla20-91/fgg -test-oblit -eval=-1 fgg/examples/monom/julien/mono-ok/rcver-iface.go
+	go run oopsla20-91/fgg -test-oblit -eval=-1 fgg/examples/monom/julien/mono-ok/one-pass-prob.go
+	go run oopsla20-91/fgg -test-oblit -eval=-1 fgg/examples/monom/julien/mono-ok/contamination.go
 
 
 # TODO: update
 .PHONY: test-oblit
 test-oblit:
 	mkdir -p tmp/test-oblit/fgr/booleans
-	go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/booleans/booleans.fgr -oblit-eval=-1 fgg/examples/popl20/booleans/booleans.fgg
+	go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/booleans/booleans.fgr -oblit-eval=-1 fgg/examples/popl20/booleans/booleans.fgg
 # TODO: standalone FGR execution (.fgr output currently unused)
 # 
 	mkdir -p tmp/test-oblit/fgr/compose
-	go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/compose/compose.fgr -oblit-eval=-1 fgg/examples/popl20/compose/compose.fgg
+	go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/compose/compose.fgr -oblit-eval=-1 fgg/examples/popl20/compose/compose.fgg
 
 	mkdir -p tmp/test-oblit/fgr/graph
-	go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/graph/graph.fgr -oblit-eval=-1 fgg/examples/popl20/graph/graph.fgg
+	go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/graph/graph.fgr -oblit-eval=-1 fgg/examples/popl20/graph/graph.fgg
 
 	mkdir -p tmp/test-oblit/fgr/irregular
-	go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/irregular/irregular.fgr -oblit-eval=-1 fgg/examples/popl20/irregular/irregular.fgg
+	go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/irregular/irregular.fgr -oblit-eval=-1 fgg/examples/popl20/irregular/irregular.fgg
 
 	mkdir -p tmp/test-oblit/fgr/map
-	go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/map/map.fgr -oblit-eval=-1 fgg/examples/popl20/map/map.fgg
+	go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/map/map.fgr -oblit-eval=-1 fgg/examples/popl20/map/map.fgg
 
 	mkdir -p tmp/test-oblit/fgr/monomorph
-	go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/monomorph/monomorph.fgr -oblit-eval=-1 fgg/examples/popl20/monomorph/monomorph.fgg
+	go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/monomorph/monomorph.fgr -oblit-eval=-1 fgg/examples/popl20/monomorph/monomorph.fgg
 
 	mkdir -p tmp/test-oblit/fgr/box
-	go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/box/box.fgr -oblit-eval=10 fgg/examples/monom/box/box.fgg
-	go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/box/box2.fgr -oblit-eval=10 fgg/examples/monom/box/box2.fgg
+	go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/box/box.fgr -oblit-eval=10 fgg/examples/monom/box/box.fgg
+	go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/box/box2.fgr -oblit-eval=10 fgg/examples/monom/box/box2.fgg
 
 	mkdir -p tmp/test-oblit/fgr/julien
-	go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/julien/ifacebox.fgr -oblit-eval=-1 fgg/examples/monom/julien/ifacebox.fgg
+	go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/julien/ifacebox.fgr -oblit-eval=-1 fgg/examples/monom/julien/ifacebox.fgg
 	# TODO: i/face embedding?
-	#go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/julien/iface-embedding-simple.fgr -oblit-eval=-1 fgg/examples/monom/julien/iface-embedding-simple.go
-	#go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/julien/iface-embedding.fgr -oblit-eval=-1 fgg/examples/monom/julien/iface-embedding.go
+	#go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/julien/iface-embedding-simple.fgr -oblit-eval=-1 fgg/examples/monom/julien/iface-embedding-simple.go
+	#go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/julien/iface-embedding.fgr -oblit-eval=-1 fgg/examples/monom/julien/iface-embedding.go
 
 	mkdir -p tmp/test-oblit/fgr/julien/mono-ok
-	go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/julien/mono-ok/rcver-iface.fgr -oblit-eval=-1 fgg/examples/monom/julien/mono-ok/rcver-iface.go
-	go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/julien/mono-ok/one-pass-prob.fgr -oblit-eval=-1 fgg/examples/monom/julien/mono-ok/one-pass-prob.go
-	go run github.com/rhu1/fgg -fgg -oblitc=tmp/test-oblit/fgr/julien/mono-ok/contamination.fgr -oblit-eval=-1 fgg/examples/monom/julien/mono-ok/contamination.go
+	go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/julien/mono-ok/rcver-iface.fgr -oblit-eval=-1 fgg/examples/monom/julien/mono-ok/rcver-iface.go
+	go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/julien/mono-ok/one-pass-prob.fgr -oblit-eval=-1 fgg/examples/monom/julien/mono-ok/one-pass-prob.go
+	go run oopsla20-91/fgg -fgg -oblitc=tmp/test-oblit/fgr/julien/mono-ok/contamination.fgr -oblit-eval=-1 fgg/examples/monom/julien/mono-ok/contamination.go
 
 	mkdir -p tmp/test-oblit/fgr/julien/mono-ko
 
@@ -427,28 +427,28 @@ clean-test-oblit:
 .PHONY: test-fg2fgg
 test-fg2fgg:
 	mkdir -p tmp/test/fgg/booleans
-	go run github.com/rhu1/fgg/cmd/fg2fgg fg/examples/popl20/booleans/booleans.go > tmp/test/fgg/booleans/booleans.fgg
-	go run github.com/rhu1/fgg -fgg -eval=-1 tmp/test/fgg/booleans/booleans.fgg
+	go run oopsla20-91/fgg/cmd/fg2fgg fg/examples/popl20/booleans/booleans.go > tmp/test/fgg/booleans/booleans.fgg
+	go run oopsla20-91/fgg -fgg -eval=-1 tmp/test/fgg/booleans/booleans.fgg
 
 	mkdir -p tmp/test/fgg/compose
-	go run github.com/rhu1/fgg/cmd/fg2fgg fg/examples/popl20/compose/compose.go > tmp/test/fgg/compose/compose.fgg
-	go run github.com/rhu1/fgg -fgg -eval=-1 tmp/test/fgg/compose/compose.fgg
+	go run oopsla20-91/fgg/cmd/fg2fgg fg/examples/popl20/compose/compose.go > tmp/test/fgg/compose/compose.fgg
+	go run oopsla20-91/fgg -fgg -eval=-1 tmp/test/fgg/compose/compose.fgg
 
 	mkdir -p tmp/test/fgg/equal
-	go run github.com/rhu1/fgg/cmd/fg2fgg fg/examples/popl20/equal/equal.go > tmp/test/fgg/equal/equal.fgg
-	go run github.com/rhu1/fgg -fgg -eval=-1 tmp/test/fgg/equal/equal.fgg
+	go run oopsla20-91/fgg/cmd/fg2fgg fg/examples/popl20/equal/equal.go > tmp/test/fgg/equal/equal.fgg
+	go run oopsla20-91/fgg -fgg -eval=-1 tmp/test/fgg/equal/equal.fgg
 
 	mkdir -p tmp/test/fgg/incr
-	go run github.com/rhu1/fgg/cmd/fg2fgg fg/examples/popl20/incr/incr.go > tmp/test/fgg/incr/incr.fgg
-	go run github.com/rhu1/fgg -fgg -eval=-1 tmp/test/fgg/incr/incr.fgg
+	go run oopsla20-91/fgg/cmd/fg2fgg fg/examples/popl20/incr/incr.go > tmp/test/fgg/incr/incr.fgg
+	go run oopsla20-91/fgg -fgg -eval=-1 tmp/test/fgg/incr/incr.fgg
 
 	mkdir -p tmp/test/fgg/map
-	go run github.com/rhu1/fgg/cmd/fg2fgg fg/examples/popl20/map/map.go > tmp/test/fgg/map/map.fgg
-	go run github.com/rhu1/fgg -fgg -eval=-1 tmp/test/fgg/map/map.fgg
+	go run oopsla20-91/fgg/cmd/fg2fgg fg/examples/popl20/map/map.go > tmp/test/fgg/map/map.fgg
+	go run oopsla20-91/fgg -fgg -eval=-1 tmp/test/fgg/map/map.fgg
 
 	mkdir -p tmp/test/fgg/not
-	go run github.com/rhu1/fgg/cmd/fg2fgg fg/examples/popl20/not/not.go > tmp/test/fgg/not/not.fgg
-	go run github.com/rhu1/fgg -fgg -eval=-1 tmp/test/fgg/not/not.fgg
+	go run oopsla20-91/fgg/cmd/fg2fgg fg/examples/popl20/not/not.go > tmp/test/fgg/not/not.fgg
+	go run oopsla20-91/fgg -fgg -eval=-1 tmp/test/fgg/not/not.fgg
 
 # TODO: run fg_test.go unit tests through fg2fgg
 
