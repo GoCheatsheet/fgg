@@ -176,7 +176,7 @@ The following commands are run from the `oopsla20-91/fgg` directory.
   * compiles and executes the FG program using `go`;
   * compares the results from `fgg` and `go`.
 
-* `simulate-monom`
+* `make simulate-monom`
 
   * Simulates a series of FGG programs against their FG monomorphisations.
 
