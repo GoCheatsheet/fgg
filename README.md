@@ -29,7 +29,7 @@ Package organisation:
 ### Install.
 
 Simply extract the contents of the zip (including the ANTLR library) directly into the `src` directory of
-your Go workspace (`$GOPATH`).  Then the following command should work:
+your Go workspace (i.e., `$GOPATH/src`).  Then the following command should work:
 
   `go run oopsla20-91/fgg -eval=-1 -v fg/examples/oopsla20/fig1/functions.go`
 
@@ -118,7 +118,7 @@ Notes:
 
 ### Example run commands.
 
-Warning:  Type checking and _nomono_ errors raise a panic -- simple error
+Warning:  Type checking and _nomono_ errors raise a panic -- basic error
 messages can be found at the top of the stack trace.
 
 * **FG type check and evaluate**, with verbose printing.
