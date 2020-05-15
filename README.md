@@ -30,7 +30,7 @@ Package organisation:
 
 We assume a standard Go set up.  That is:
 
-* Go (version 1.12+);
+* Go (version 1.11.5+);
 * a Go workspace, at `$GOPATH`;
 * a `src` directory in the workspace.
 
@@ -41,10 +41,10 @@ your Go workspace (i.e., `$GOPATH/src`).
 
     `go run oopsla20-91/fgg -eval=-1 -v fg/examples/oopsla20/fig1/functions.go`
 
-This package has been tested using Go version 1.12+ on:
+This package has been tested using Go version 1.11.5+ on:
 
+* MacOS Catalina
 * Cygwin/Windows 10
-* **TODO**
 
 ---
 
