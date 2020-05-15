@@ -37,7 +37,7 @@ We assume a standard Go set up.  That is:
 Simply extract the contents of the zip (including the ANTLR library) directly into the `src` directory of
 your Go workspace (i.e., `$GOPATH/src`).  
 
-  * Then inside the `oopsla20-91/fgg` directory just extracted, the following command should work:
+  * Then in the `oopsla20-91/fgg` directory just extracted, the following command should work:
 
     `go run oopsla20-91/fgg -eval=-1 -v fg/examples/oopsla20/fig1/functions.go`
 
@@ -129,6 +129,8 @@ Notes:
 Warning:  Type checking and _nomono_ errors raise a panic -- basic error
 messages can be found at the top of the stack trace.
 
+The following commands are run from the `oopsla20-91/fgg` directory.
+
 * **FG type check and evaluate**, with verbose printing.
 
   `go run oopsla20-91/fgg -eval=-1 -v fg/examples/oopsla20/fig1/functions.go`
@@ -163,6 +165,8 @@ messages can be found at the top of the stack trace.
 ---
 
 ### Example `Makefile` tests.
+
+The following commands are run from the `oopsla20-91/fgg` directory.
 
 * `make test-monom-against-go`
 
