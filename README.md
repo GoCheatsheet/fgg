@@ -35,9 +35,11 @@ We assume a standard Go set up.  That is:
 * a `src` directory in the workspace.
 
 Simply extract the contents of the zip (including the ANTLR library) directly into the `src` directory of
-your Go workspace (i.e., `$GOPATH/src`).  Then the following command should work:
+your Go workspace (i.e., `$GOPATH/src`).  
 
-  `go run oopsla20-91/fgg -eval=-1 -v fg/examples/oopsla20/fig1/functions.go`
+  * Then inside the `oopsla20-91` directory just extracted, the following command should work:
+
+    `go run oopsla20-91/fgg -eval=-1 -v fg/examples/oopsla20/fig1/functions.go`
 
 This package has been tested using Go version 1.12+ on:
 
