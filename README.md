@@ -28,6 +28,12 @@ Package organisation:
 
 ### Install.
 
+We assume a standard Go set up.  That is:
+
+* Go (version 1.12+);
+* a Go workspace, at `$GOPATH`;
+* a `src` directory in the workspace.
+
 Simply extract the contents of the zip (including the ANTLR library) directly into the `src` directory of
 your Go workspace (i.e., `$GOPATH/src`).  Then the following command should work:
 
